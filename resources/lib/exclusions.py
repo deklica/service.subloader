@@ -46,6 +46,14 @@ def timeexclusion():
 		return False
 
 
+def videoclipexclusion():
+	video_type = xbmc.Player().getVideoInfoTag().getMediaType()
+	if (video_type == "musicvideo") and boolsetting('excludevideoclip'):
+		debug('Excluded: the video is music video clip')
+		return False
+	return True
+
+
 def audioexclusion():
 
 	if boolsetting('excludeaudio'):
@@ -96,7 +104,7 @@ def pathexclusion():
 	if not videopath():
 		return False
 
-	if (videopath().find("pvr://") > -1) and boolsetting('excludelivetv'):
+	if ((videopath().find("pvr://") > -1) or (videosource().find("pvr://") > -1)) and boolsetting('excludelivetv'):
 		debug('Video is playing via Live TV, which is currently set as excluded location.')
 		return False
 
@@ -139,7 +147,7 @@ def pathexclusion():
 
 def globalexclusion():
 
-	if pathexclusion() and addonexclusion() and wordsexclusion() and timeexclusion() and subexclusion() and audioexclusion():
+	if pathexclusion() and addonexclusion() and wordsexclusion() and videoclipexclusion() and timeexclusion() and subexclusion() and audioexclusion():
 		return True
 	return False
 

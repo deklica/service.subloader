@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os, sys, xbmc
+import os, sys, xbmc, xbmcaddon
 from resources.lib.utils import name, version, setting, boolsetting
 
 try:
@@ -11,10 +11,11 @@ except:
     xc = xmlrpclib
 
 
-
 OpenSubtitles = xc.Server('http://api.opensubtitles.org/xml-rpc', verbose=0)
-
-
+base = "%s_v%s" #kodi_%s_v%s
+__scriptname__ = "XBMC Subtitles Unofficial"
+name = __scriptname__.replace(" ","_")
+version = "5.5.3"
 
 
 #OpenSubtilte.org functions*******************************************************************************************************************************
@@ -22,14 +23,14 @@ OpenSubtitles = xc.Server('http://api.opensubtitles.org/xml-rpc', verbose=0)
 def OSserver():
         user = ""
         password = ""
-        ua = "kodi_%s_v%s" % (name().lower(), version())
+        ua = base % (name, version)
         if boolsetting('OScustomuser'):
                 if setting ('OSuser') != '' or setting('OSpassword') != '':
                         user = setting('OSuser')
                         password = setting('OSpassword')
                 else:
-                        user = "error"
-                        password = "error"
+                        user = ""
+                        password = ""
         return OpenSubtitles.LogIn(user, password, 'en', ua)
 
 

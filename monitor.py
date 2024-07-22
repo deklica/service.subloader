@@ -1,11 +1,20 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os, sys, xbmc, time
+import os, sys, xbmc, xbmcaddon, xbmcgui, time
 from resources.lib.loadsub import loadsub
 from resources.lib.exclusions import globalexclusion
 from resources.lib.OSserver import OSusersetting, OSuser
 from resources.lib.utils import setting, boolsetting, setsetting, localize, debug, debugsetting
+
+
+addon = xbmcaddon.Addon()
+
+def update_context_menu_status():
+    enable_context_menu = addon.getSettingBool('enable_context_menu')
+    xbmcgui.Window(10000).setProperty('enable_context_menu', str(enable_context_menu).lower())
+
+update_context_menu_status()
 
 
 #Main Monitor********************************************************************************************************************************************
@@ -31,7 +40,7 @@ class SubLoaderMonitor(xbmc.Monitor):
 				debug('Debug initalized')
 				if not closedebug:
 					debug('Debug stopped', force = True)
-
+					
 			if OSusersetting():
 				self.run = False
 				debug('OS User settings changed')
@@ -45,7 +54,9 @@ class SubLoaderMonitor(xbmc.Monitor):
 					setsetting('OSusercheck', value='nouser')
 					setsetting('OSpasswordcheck', value='nopassword')
 					debug('OS Login: unsuccessful')
-
+					
+			update_context_menu_status()
+		
 		else:
 			xbmc.sleep(1000)
 			self.run = True
@@ -80,11 +91,11 @@ class SubLoaderPlayer(xbmc.Player):
 			if xbmc.Player().isPlayingVideo() and globalexclusion():
 				self.run = False	
 				if setting('default') == '0':
-					debug('Default: automatic subtitles')
-					loadsub()
-				elif setting('default') == '1':
 					debug('Default: opening search dialog')
 					xbmc.executebuiltin('ActivateWindow(SubtitleSearch)')
+				elif setting('default') == '1':
+					debug('Default: automatic subtitles')
+					loadsub()
 				else:
 					debug('Default: do nothing...')
 			else:

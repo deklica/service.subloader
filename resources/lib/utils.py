@@ -15,7 +15,7 @@ except:
     loglevel = xbmc.LOGINFO
     py2 = False
 
-langdict = {
+langdict = { #ISO639-2
         'Afrikaans': 'afr', 'Albanian': 'alb', 'Arabic': 'ara', 'Armenian': 'arm', 'Basque': 'baq',
         'Bengali': 'ben', 'Bosnian': 'bos', 'Breton': 'bre', 'Bulgarian': 'bul', 'Burmese': 'bur',
         'Catalan': 'cat', 'Chinese': 'chi', 'Croatian': 'hrv', 'Czech': 'cze', 'Danish': 'dan', 'Dutch': 'dut',
@@ -24,13 +24,11 @@ langdict = {
         'Hungarian': 'hun', 'Icelandic': 'ice', 'Indonesian': 'ind', 'Italian': 'ita', 'Japanese': 'jpn',
         'Kazakh': 'kaz', 'Khmer': 'khm', 'Korean': 'kor', 'Latvian': 'lav', 'Lithuanian': 'lit',
         'Luxembourgish': 'ltz', 'Macedonian': 'mac', 'Malay': 'may', 'Malayalam': 'mal', 'Manipuri': 'mni',
-        'Mongolian': 'mon', 'Montenegrin': 'mne', 'Norwegian': 'nor', 'Occitan': 'oci', 'Persian': 'per',
+        'Mongolian': 'mon', 'Norwegian': 'nor', 'Occitan': 'oci', 'Persian': 'per',
         'Polish': 'pol', 'Portuguese': 'por', 'Portuguese(Brazil)': 'pob', 'Romanian': 'rum',
         'Russian': 'rus', 'Serbian': 'scc', 'Sinhalese': 'sin', 'Slovak': 'slo', 'Slovenian': 'slv',
         'Spanish': 'spa', 'Swahili': 'swa', 'Swedish': 'swe', 'Syriac': 'syr', 'Tagalog': 'tgl', 'Tamil': 'tam',
         'Telugu': 'tel', 'Thai': 'tha', 'Turkish': 'tur', 'Ukrainian': 'ukr', 'Urdu': 'urd'}
-
-
 
 
 def addon():
@@ -85,6 +83,13 @@ def videopath():
 
 
 def videosource():
+        filepath = xbmc.getInfoLabel('Player.Filenameandpath')
+        fileext = os.path.splitext(filepath)
+        if fileext[1] == '.strm':
+                file = xbmcvfs.File(filepath, 'r')
+                source = file.read()
+                file.close()
+                return source # A .strm file contains actual source inside
         return xbmc.getInfoLabel('Player.Folderpath')
 
 

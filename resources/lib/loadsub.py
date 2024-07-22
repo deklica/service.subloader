@@ -38,7 +38,7 @@ def loadsub():
                 addon = "service.subloader"#alterar quando estiver tudo ligado
                 localize = xbmcaddon.Addon(addon).getLocalizedString
                 server = xc.Server('http://api.opensubtitles.org/xml-rpc', verbose=0)
-#               token = server.LogIn('', '', 'en', 'kodi_subloader_v0.1.3')['token']
+#               token = server.LogIn('', '', 'en', 'kodi_subloader_v0.1.6')['token']
                 media = xbmc.Player().getVideoInfoTag().getMediaType()
 
                 langDict = {
@@ -50,7 +50,7 @@ def loadsub():
                         'Hungarian': 'hun', 'Icelandic': 'ice', 'Indonesian': 'ind', 'Italian': 'ita', 'Japanese': 'jpn',
                         'Kazakh': 'kaz', 'Khmer': 'khm', 'Korean': 'kor', 'Latvian': 'lav', 'Lithuanian': 'lit',
                         'Luxembourgish': 'ltz', 'Macedonian': 'mac', 'Malay': 'may', 'Malayalam': 'mal', 'Manipuri': 'mni',
-                        'Mongolian': 'mon', 'Montenegrin': 'mne', 'Norwegian': 'nor', 'Occitan': 'oci', 'Persian': 'per',
+                        'Mongolian': 'mon', 'Norwegian': 'nor', 'Occitan': 'oci', 'Persian': 'per',
                         'Polish': 'pol', 'Portuguese': 'por', 'Portuguese(Brazil)': 'pob', 'Romanian': 'rum',
                         'Russian': 'rus', 'Serbian': 'scc', 'Sinhalese': 'sin', 'Slovak': 'slo', 'Slovenian': 'slv',
                         'Spanish': 'spa', 'Swahili': 'swa', 'Swedish': 'swe', 'Syriac': 'syr', 'Tagalog': 'tgl', 'Tamil': 'tam',
@@ -250,7 +250,9 @@ def loadsub():
                 if setting('notif') == 'true':
                         xbmc.sleep(4000)
                         test = [filter[0]['MovieReleaseName'], ]
-                        xbmc.executebuiltin('Notification("%s", "%s", "%s",)' % (lang, test, 4000))
+                        langlong = next((key for key, value in langDict.items() if value == lang), None)
+                        rlsname = str(test).replace("['", "").replace("']", "")
+                        xbmc.executebuiltin('Notification("%s", "%s", "%s",)' % (langlong, rlsname, 4000))
 
 #***********************************************************************************************************************************************************************************************************
 

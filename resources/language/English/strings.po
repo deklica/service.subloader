@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: Sub Loader
+# Addon Name: SubLoader
 # Addon id: service.subloader
-# Addon Provider: DenimNani
+# Addon Provider: dEXE, DenimNani
 # Language: English
 
 msgid ""
@@ -188,5 +188,37 @@ msgid "Do nothing"
 msgstr ""
 
 msgctxt "#32046"
+msgid "Options"
+msgstr ""
+
+msgctxt "#32047"
+msgid "Developer"
+msgstr ""
+
+msgctxt "#32048"
+msgid "[COLOR FFffd800]Check for subtitles...[/COLOR]"
+msgstr ""
+
+msgctxt "#32049"
+msgid "Enable context menu Subtitles search dialog"
+msgstr ""
+
+msgctxt "#32050"
+msgid "Exclude Music Videos"
+msgstr ""
+
+msgctxt "#32051"
+msgid "Features"
+msgstr ""
+
+msgctxt "#32052"
+msgid "Context menu setting is disabled because the addon[CR]context.subtitlesdialog.contextmenu is installed."
+msgstr ""
+
+msgctxt "#32053"
+msgid "Only supported by OpenSubtitles Plus (OpenSubtitles.com)[CR]and OpenSubtitles.org by OpenSubtitles with dual subs addon."
+msgstr ""
+
+msgctxt "#32054"
 msgid ""
 msgstr ""
