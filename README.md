@@ -1,7 +1,8 @@
 # SubLoader
 
 > ### About SubLoader
-SubLoader auto trigger Kodi subtitle search dialog if no subtitle (language) with exclusions is found, or auto download the best subtitle automatically from OpenSubtitles.org as soon you start the video for a Movie/TV Show, and adds a subtitles dialog contextmenu button.
+SubLoader auto trigger Kodi subtitle search dialog if no subtitle (language) with exclusions is found, or auto download the best subtitle automatically from OpenSubtitles.org as soon you start the video for a Movie/TV Show, or reads the embedded subtitle if it is in the excluded list.
+It also has a feature to add a subtitles dialog contextmenu button to search if subtitle is available for a video.
 
 Special thanks to [OpenSubtitles.org](http://www.opensubtitles.org ) for providing a unique UA for Subloader.
 
@@ -22,5 +23,3 @@ For now, the addon is only compatible with Kodi 18.0 or higher.
 SubLoader is a fork from the well-known AutoSubs/AutoSrt addon. It also contains some code from a Jen base addon. All credits go to the original developers and DenimNani for original SubLoader.
 
 I'm not a programmer; all I do is trial and error to find a possible solution. So please if someone wants to help out and to push this addon forward, be my guest.
-
-**DOWNLOAD** via <a href="https://github.com/deklica/repo.dexe" target="_blank">dEXE's Addons Repo</a>

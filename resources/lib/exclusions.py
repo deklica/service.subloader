@@ -77,7 +77,6 @@ def audioexclusion():
 
 
 def subexclusion():
-
 	if boolsetting('excludesub'):
 		langs = []
 		langs.append(utils.langdict[setting('excludesublang1')])
@@ -87,12 +86,15 @@ def subexclusion():
 			langs.append(utils.langdict[setting('excludesublang3')])
 		availablesubs = xbmc.Player().getAvailableSubtitleStreams()
 		debug('Available sub languages: %s' % availablesubs)
-		availablesubs = " ".join(availablesubs)
-		if any(x in availablesubs for x in langs):
-			debug('Subtitle is already present')
-			return False
-		return True
-	return True
+		
+		availablesubs_dict = {sub: idx for idx, sub in enumerate(availablesubs)}
+
+		for lang in langs:
+			if lang in availablesubs_dict:
+				debug(f'Subtitle {lang} is already present at index {availablesubs_dict[lang]}')
+				return False, availablesubs_dict[lang], lang
+		return True, None, None
+	return True, None, None
 
 
 def pathexclusion():
@@ -146,9 +148,16 @@ def pathexclusion():
 
 
 def globalexclusion():
+	pathexcl = pathexclusion()
+	addonexcl = addonexclusion()
+	wordsexcl = wordsexclusion()
+	videoclipexcl = videoclipexclusion()
+	timeexcl = timeexclusion()
+	subexcl, sub_index, excluded_lang = subexclusion()
+	audioexcl = audioexclusion()
 
-	if pathexclusion() and addonexclusion() and wordsexclusion() and videoclipexclusion() and timeexclusion() and subexclusion() and audioexclusion():
-		return True
-	return False
+	if pathexcl and addonexcl and wordsexcl and videoclipexcl and timeexcl and subexcl and audioexcl:
+		return True, sub_index, excluded_lang
+	return False, sub_index, excluded_lang
 
 #********************************************************************************************************************************************************

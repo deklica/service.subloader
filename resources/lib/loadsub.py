@@ -168,7 +168,7 @@ def loadsub():
                 filestr = vidPath.split('/')[-1]#funciona em cache torrents
 
                 if setting('notif') == 'true':
-                        xbmc.executebuiltin('Notification("%s", "%s", "%s",)' % (fmtst, filestr, 4000))
+                        xbmc.executebuiltin('Notification("%s", "%s", "%s",)' % (fmtst.upper(), filestr, 4000))
 
 #***********************************************************************************************************************************************************************************************************
 
@@ -252,7 +252,8 @@ def loadsub():
                         test = [filter[0]['MovieReleaseName'], ]
                         langlong = next((key for key, value in langDict.items() if value == lang), None)
                         rlsname = str(test).replace("['", "").replace("']", "")
-                        xbmc.executebuiltin('Notification("%s", "%s", "%s",)' % (langlong, rlsname, 4000))
+                        subtitle_str = localize(32058).format(langlong=langlong)
+                        xbmc.executebuiltin('Notification("%s", "%s", "%s",)' % (subtitle_str, rlsname, 4000))
 
 #***********************************************************************************************************************************************************************************************************
 

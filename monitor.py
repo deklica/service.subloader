@@ -5,7 +5,7 @@ import os, sys, xbmc, xbmcaddon, xbmcgui, time
 from resources.lib.loadsub import loadsub
 from resources.lib.exclusions import globalexclusion
 from resources.lib.OSserver import OSusersetting, OSuser
-from resources.lib.utils import setting, boolsetting, setsetting, localize, debug, debugsetting
+from resources.lib.utils import setting, boolsetting, setsetting, localize, debug, debugsetting, langdict
 
 
 addon = xbmcaddon.Addon()
@@ -84,23 +84,38 @@ class SubLoaderPlayer(xbmc.Player):
 
 	def onAVStarted(self):
 		self.run = True
-		delay = int(setting('delay'))*1000
+		delay = int(setting('delay')) * 1000
 
 		if self.run:
-			xbmc.sleep(delay)		
-			if xbmc.Player().isPlayingVideo() and globalexclusion():
-				self.run = False	
-				if setting('default') == '0':
-					debug('Default: opening search dialog')
-					xbmc.executebuiltin('ActivateWindow(SubtitleSearch)')
-				elif setting('default') == '1':
-					debug('Default: automatic subtitles')
-					loadsub()
-				else:
-					debug('Default: do nothing...')
-			else:
-				self.run = False
+			xbmc.sleep(delay)
+			if xbmc.Player().isPlayingVideo():
+				global_excl, sub_index, excluded_lang = globalexclusion()
+			
+				enable_subtitle = boolsetting('enable_embedded_subtitle')
+				if enable_subtitle and sub_index is not None:
+					debug(f'Enabling subtitle at index {sub_index}')
+					xbmc.Player().setSubtitleStream(sub_index)
+				
+					if boolsetting('embedded_subtitle_notif'):
+						langlong = next((key for key, value in langdict.items() if value == excluded_lang), None)
+						if langlong:
+							debug(f'Embedded {langlong} subtitle enabled')
+							subtitle_enabled_str = localize(32056)
+							embedded_subtitle_str = localize(32057).format(langlong=langlong)
+							xbmc.executebuiltin(f'Notification("{subtitle_enabled_str}", "{embedded_subtitle_str}", 4000)')
 
+				if global_excl:
+					self.run = False
+					if setting('default') == '0':
+						debug('Default: opening search dialog')
+						xbmc.executebuiltin('ActivateWindow(SubtitleSearch)')
+					elif setting('default') == '1':
+						debug('Default: automatic subtitles')
+						loadsub()
+					else:
+						debug('Default: do nothing...')
+				else:
+					self.run = False
 
 player = SubLoaderPlayer()
 
