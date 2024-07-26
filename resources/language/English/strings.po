@@ -176,7 +176,7 @@ msgid "Users"
 msgstr ""
 
 msgctxt "#32043"
-msgid "Bypass "Undetermined" audio"
+msgid "     Bypass "Undetermined" audio"
 msgstr ""
 
 msgctxt "#32044"
@@ -240,5 +240,25 @@ msgid "{langlong} subtitle"
 msgstr ""
 
 msgctxt "#32059"
+msgid "     Select audio stream language"
+msgstr ""
+
+msgctxt "#32060"
+msgid "Audio stream"
+msgstr ""
+
+msgctxt "#32061"
+msgid "{langlong} language selected"
+msgstr ""
+
+msgctxt "#32062"
+msgid "       Prefer forced (embedded only)"
+msgstr ""
+
+msgctxt "#32063"
+msgid "       Prefer SDH (embedded only)"
+msgstr ""
+
+msgctxt "#32064"
 msgid ""
 msgstr ""
