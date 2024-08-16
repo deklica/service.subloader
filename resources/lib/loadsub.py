@@ -42,19 +42,26 @@ def loadsub():
 				media = xbmc.Player().getVideoInfoTag().getMediaType()
 
 				langDict = {
-						'Afrikaans': 'afr', 'Albanian': 'alb', 'Arabic': 'ara', 'Armenian': 'arm', 'Basque': 'baq',
-						'Bengali': 'ben', 'Bosnian': 'bos', 'Breton': 'bre', 'Bulgarian': 'bul', 'Burmese': 'bur',
-						'Catalan': 'cat', 'Chinese': 'chi', 'Croatian': 'hrv', 'Czech': 'cze', 'Danish': 'dan', 'Dutch': 'dut',
-						'English': 'eng', 'Esperanto': 'epo', 'Estonian': 'est', 'Finnish': 'fin', 'French': 'fre',
-						'Galician': 'glg', 'Georgian': 'geo', 'German': 'ger', 'Greek': 'ell', 'Hebrew': 'heb', 'Hindi': 'hin',
-						'Hungarian': 'hun', 'Icelandic': 'ice', 'Indonesian': 'ind', 'Italian': 'ita', 'Japanese': 'jpn',
-						'Kazakh': 'kaz', 'Khmer': 'khm', 'Korean': 'kor', 'Latvian': 'lav', 'Lithuanian': 'lit',
-						'Luxembourgish': 'ltz', 'Macedonian': 'mac', 'Malay': 'may', 'Malayalam': 'mal', 'Manipuri': 'mni',
-						'Mongolian': 'mon', 'Norwegian': 'nor', 'Occitan': 'oci', 'Persian': 'per',
-						'Polish': 'pol', 'Portuguese': 'por', 'Portuguese(Brazil)': 'pob', 'Romanian': 'rum',
-						'Russian': 'rus', 'Serbian': 'scc', 'Sinhalese': 'sin', 'Slovak': 'slo', 'Slovenian': 'slv',
-						'Spanish': 'spa', 'Swahili': 'swa', 'Swedish': 'swe', 'Syriac': 'syr', 'Tagalog': 'tgl', 'Tamil': 'tam',
-						'Telugu': 'tel', 'Thai': 'tha', 'Turkish': 'tur', 'Ukrainian': 'ukr', 'Urdu': 'urd'}
+						'Abkhazian': 'abk', 'Afrikaans': 'afr', 'Albanian': 'alb', 'Amharic': 'amh', 'Arabic': 'ara',
+						'Aragonese': 'arg', 'Armenian': 'arm', 'Assamese': 'asm', 'Asturian': 'ast', 'Azerbaijani': 'aze',
+						'Basque': 'baq', 'Belarusian': 'bel', 'Bengali': 'ben', 'Bosnian': 'bos', 'Breton': 'bre',
+						'Bulgarian': 'bul', 'Burmese': 'bur', 'Catalan': 'cat', 'Chinese': 'chi', 'Croatian': 'hrv',
+						'Czech': 'cze', 'Danish': 'dan', 'Dari': 'prs', 'Dutch': 'dut', 'English': 'eng',
+						'Esperanto': 'epo', 'Estonian': 'est', 'Extremaduran': 'ext', 'Finnish': 'fin', 'French': 'fre',
+						'Gaelic': 'gla', 'Galician': 'glg', 'Georgian': 'geo', 'German': 'ger', 'Greek': 'ell',
+						'Hebrew': 'heb', 'Hindi': 'hin', 'Hungarian': 'hun', 'Icelandic': 'ice', 'Igbo': 'ibo',
+						'Indonesian': 'ind', 'Interlingua': 'ina', 'Irish': 'gle', 'Italian': 'ita', 'Japanese': 'jpn',
+						'Kannada': 'kan', 'Kazakh': 'kaz', 'Khmer': 'khm', 'Korean': 'kor', 'Kurdish': 'kur',
+						'Kyrgyz': 'kir', 'Latvian': 'lav', 'Lithuanian': 'lit', 'Luxembourgish': 'ltz', 'Macedonian': 'mac',
+						'Malay': 'may', 'Malayalam': 'mal', 'Manipuri': 'mni', 'Marathi': 'mar', 'Mongolian': 'mon',
+						'Navajo': 'nav', 'Nepali': 'nep', 'Northern Sami': 'sme', 'Norwegian': 'nor', 'Occitan': 'oci',
+						'Odia': 'ori', 'Persian': 'per', 'Polish': 'pol', 'Portuguese': 'por', 'Portuguese (BR)': 'pob', 'Portuguese (MZ)': 'pom', 'Pushto': 'pus',
+						'Romanian': 'rum', 'Russian': 'rus', 'Santali': 'sat', 'Serbian': 'scc', 'Sindhi': 'snd',
+						'Sinhalese': 'sin', 'Slovak': 'slo', 'Slovenian': 'slv', 'Somali': 'som', 'South Azerbaijani': 'azb',
+						'Spanish': 'spa', 'Spanish (EU)': 'spn', 'Spanish (LA)': 'spl', 'Swahili': 'swa', 'Swedish': 'swe', 'Syriac': 'syr', 'Tagalog': 'tgl',
+						'Tamil': 'tam', 'Tatar': 'tat', 'Telugu': 'tel', 'Tetum': 'tet', 'Thai': 'tha',
+						'Toki Pona': 'tok', 'Turkish': 'tur', 'Turkmen': 'tuk', 'Ukrainian': 'ukr', 'Urdu': 'urd',
+						'Uzbek': 'uzb', 'Vietnamese': 'vie', 'Welsh': 'wel'}
 
 				codePageDict = {
 						'ara': 'cp1256', 'ar': 'cp1256', 'ell': 'cp1253', 'el': 'cp1253', 'heb': 'cp1255',

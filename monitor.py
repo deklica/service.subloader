@@ -90,33 +90,31 @@ class SubLoaderPlayer(xbmc.Player):
 			xbmc.sleep(delay)
 			if xbmc.Player().isPlayingVideo():
 				global_excl, sub_index, excluded_lang, aud_index, excluded_aud = globalexclusion()
-			
+
 				if setting('default') != '2':
 				
 					enable_subtitle = boolsetting('enable_embedded_subtitle')
 					if enable_subtitle and sub_index is not None:
 						debug(f'Enabling subtitle at index {sub_index}')
 						xbmc.Player().setSubtitleStream(sub_index)
-				
-						if boolsetting('embedded_subtitle_notif'):
-							langlong = next((key for key, value in langdict.items() if value == excluded_lang), None)
-							if langlong:
-								debug(f'Embedded {langlong} subtitle enabled')
-								subtitle_enabled_str = localize(32056)
-								embedded_subtitle_str = localize(32057).format(langlong=langlong)
-								xbmc.executebuiltin(f'Notification("{subtitle_enabled_str}", "{embedded_subtitle_str}", 4000)')
 		
+						if boolsetting('embedded_subtitle_notif'):
+							if excluded_lang:
+								debug(f'Embedded {excluded_lang} subtitle enabled')
+								subtitle_enabled_str = localize(32056)
+								embedded_subtitle_str = localize(32057).format(langlong=excluded_lang)
+								xbmc.executebuiltin(f'Notification("{subtitle_enabled_str}", "{embedded_subtitle_str}", 4000)')
+
 					select_audio = boolsetting('select_audio_stream')
 					if select_audio and aud_index is not None:
 						debug(f'Selecting audio stream at index {aud_index}')
 						xbmc.Player().setAudioStream(aud_index)
-						
+		
 						if boolsetting('audio_stream_notif'):
-							langlong = next((key for key, value in langdict.items() if value == excluded_aud), None)
-							if langlong:
-								debug(f'{langlong} audio stream enabled')
+							if excluded_aud:
+								debug(f'{excluded_aud} audio stream enabled')
 								audio_enabled_str = localize(32060)
-								selected_audio_str = localize(32061).format(langlong=langlong)
+								selected_audio_str = localize(32061).format(langlong=excluded_aud)
 								xbmc.executebuiltin(f'Notification("{audio_enabled_str}", "{selected_audio_str}", 4000)')
 
 				if global_excl:

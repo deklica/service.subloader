@@ -59,25 +59,26 @@ def subexclusion():
 
 	if boolsetting('excludesub'):
 		langs = []
-		langs.append(utils.langdict[setting('excludesublang1')])
+		langs.extend(utils.langdict.get(setting('excludesublang1'), []))
 		if not setting('excludesublang2') == "-----":
-			langs.append(utils.langdict[setting('excludesublang2')])
+			langs.extend(utils.langdict.get(setting('excludesublang2'), []))
 		if not setting('excludesublang3') == "-----":
-			langs.append(utils.langdict[setting('excludesublang3')])
+			langs.extend(utils.langdict.get(setting('excludesublang3'), []))
 
 		availablesubs = xbmc.Player().getAvailableSubtitleStreams()
 		debug('Available sub languages: %s' % availablesubs)
 		
-		#availablesubs_dict = {sub: idx for idx, sub in enumerate(availablesubs)}
 		availablesubs_dict = {}
 		for idx, sub in enumerate(availablesubs):
 			if sub not in availablesubs_dict:
 				availablesubs_dict[sub] = idx
 
-		for lang in langs:
-			if lang in availablesubs_dict:
-				debug(f'Subtitle {lang} is already present at index {availablesubs_dict[lang]}')
-				return False, availablesubs_dict[lang], lang
+		for lang_code in langs:
+			if lang_code in availablesubs_dict:
+				langlong = next((key for key, values in utils.langdict.items() if lang_code in values), None)
+				if langlong:
+					debug(f'Subtitle {langlong} is already present at index {availablesubs_dict[lang_code]}')
+					return False, availablesubs_dict[lang_code], langlong
 
 		return True, None, None
 	return True, None, None
@@ -87,29 +88,32 @@ def audioexclusion():
 
 	if boolsetting('excludeaudio'):
 		langs = []
-		langs.append(utils.langdict[setting('excludeaudiolang1')])
+		langs.extend(utils.langdict.get(setting('excludeaudiolang1'), []))
 		if not setting('excludeaudiolang2') == "-----":
-			langs.append(utils.langdict[setting('excludeaudiolang2')])
+			langs.extend(utils.langdict.get(setting('excludeaudiolang2'), []))
 		if not setting('excludeaudiolang3') == "-----":
-			langs.append(utils.langdict[setting('excludeaudiolang3')])
+			langs.extend(utils.langdict.get(setting('excludeaudiolang3'), []))
 
 		availableaudio = xbmc.Player().getAvailableAudioStreams()
 		debug('Available audio streams: %s' % availableaudio)
 		
-		#availableaudio_dict = {aud: idx for idx, aud in enumerate(availableaudio)}
 		availableaudio_dict = {}
 		for idx, aud in enumerate(availableaudio):
 			if aud not in availableaudio_dict:
 				availableaudio_dict[aud] = idx
 		
-		for lang in langs:
-			if lang in availableaudio_dict:
+		for lang_code in langs:
+			if lang_code in availableaudio_dict:
 				if len(availableaudio_dict) > 1:
-					debug(f'Excluded: the {lang} language audio is excluded')
-					return False, availableaudio_dict[lang], lang
+					langlong = next((key for key, values in utils.langdict.items() if lang_code in values), None)
+					if langlong:
+						debug(f'Excluded: the {langlong} language audio is excluded')
+						return False, availableaudio_dict[lang_code], langlong
 				else:
-					debug(f'{lang} audio is excluded, but it is the only available audio stream')
-					return False, None, None
+					langlong = next((key for key, values in utils.langdict.items() if lang_code in values), None)
+					if langlong:
+						debug(f'{langlong} audio is excluded, but it is the only available audio stream')
+						return False, None, None
 
 		if "und" in availableaudio and not boolsetting('audiound'):
 			debug('Excluded: undertermined audio')
@@ -121,7 +125,7 @@ def audioexclusion():
 
 def pathexclusion():
 
-	debug('Content path: %s' % videopath())
+	#debug('Content path: %s' % videopath())
 	if videopath().find("http://") > -1 or videopath().find("https://") > -1:
 		debug('Content source: %s' % videosource())
 
