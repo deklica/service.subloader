@@ -216,7 +216,7 @@ msgid "The context menu setting is disabled because the add-on[CR]context.subtit
 msgstr ""
 
 msgctxt "#32053"
-msgid "Supported only by the Titlovi.com, OpenSubtitles Plus (OpenSubtitles.com),[CR]and OpenSubtitles.org by OpenSubtitles add-ons."
+msgid "Supported only by the Titlovi.com, OpenSubtitles Plus[CR](OpenSubtitles.com), and OpenSubtitles.org by OpenSubtitles add-ons."
 msgstr ""
 
 msgctxt "#32054"
